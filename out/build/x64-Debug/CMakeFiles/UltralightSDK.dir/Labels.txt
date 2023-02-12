@@ -1,0 +1,13 @@
+# Target labels
+ UltralightSDK
+# Source files and their labels
+C:/Users/recate/source/repos/ulCodeEditor/out/build/x64-Debug/CMakeFiles/UltralightSDK
+C:/Users/recate/source/repos/ulCodeEditor/out/build/x64-Debug/CMakeFiles/UltralightSDK.rule
+C:/Users/recate/source/repos/ulCodeEditor/out/build/x64-Debug/CMakeFiles/UltralightSDK-complete.rule
+C:/Users/recate/source/repos/ulCodeEditor/out/build/x64-Debug/UltralightSDK-prefix/src/UltralightSDK-stamp/UltralightSDK-build.rule
+C:/Users/recate/source/repos/ulCodeEditor/out/build/x64-Debug/UltralightSDK-prefix/src/UltralightSDK-stamp/UltralightSDK-configure.rule
+C:/Users/recate/source/repos/ulCodeEditor/out/build/x64-Debug/UltralightSDK-prefix/src/UltralightSDK-stamp/UltralightSDK-download.rule
+C:/Users/recate/source/repos/ulCodeEditor/out/build/x64-Debug/UltralightSDK-prefix/src/UltralightSDK-stamp/UltralightSDK-install.rule
+C:/Users/recate/source/repos/ulCodeEditor/out/build/x64-Debug/UltralightSDK-prefix/src/UltralightSDK-stamp/UltralightSDK-mkdir.rule
+C:/Users/recate/source/repos/ulCodeEditor/out/build/x64-Debug/UltralightSDK-prefix/src/UltralightSDK-stamp/UltralightSDK-patch.rule
+C:/Users/recate/source/repos/ulCodeEditor/out/build/x64-Debug/UltralightSDK-prefix/src/UltralightSDK-stamp/UltralightSDK-update.rule

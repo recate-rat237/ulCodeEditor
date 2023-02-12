@@ -1,0 +1,207 @@
+﻿<html>
+  <head>
+    <title>ultralig.ht text editor</title>
+      
+    <style>
+        
+    body {
+        font-family: 'Cascadia Code';
+        background-color: #111;
+    }
+    .consoleedit {
+        resize: none;
+        background-color: #222;
+        color: #bffbff;
+        font-family: 'Cascadia Code';
+        font-size: 16px;
+    }
+    .codeedit {
+        resize: none;
+        background-color: #222;
+        color: #bffbff;
+        font-family: 'Cascadia Code';
+        font-size: 16px;
+    }
+
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+        .tablinks {
+            align-items: center;
+            background-clip: padding-box;
+            background-color: #fa6400;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+            box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            justify-content: center;
+            line-height: 0;
+            margin: 0;
+            min-height: 1rem;
+            padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+            position: relative;
+            text-decoration: none;
+            transition: all 250ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: baseline;
+            width: auto;
+        }
+
+        .tablinks:hover,
+        .tablinks:focus {
+            background-color: #fb8332;
+            box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+        }
+
+        .tablinks:hover {
+            transform: translateY(-1px);
+        }
+
+        .tablinks:active {
+            background-color: #c85000;
+            box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+            transform: translateY(0);
+        }
+
+        .button-5 {
+            align-items: center;
+            background-clip: padding-box;
+            background-color: #fa6400;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+            box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            justify-content: center;
+            line-height: 1.25;
+            margin: 0;
+            min-height: 3rem;
+            padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+            position: relative;
+            text-decoration: none;
+            transition: all 250ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: baseline;
+            width: auto;
+        }
+
+        .button-5:hover,
+        .button-5:focus {
+            background-color: #fb8332;
+            box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+        }
+
+        .button-5:hover {
+            transform: translateY(-1px);
+        }
+
+        .button-5:active {
+            background-color: #c85000;
+            box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+            transform: translateY(0);
+        }
+
+    </style>
+  </head>
+  <body>
+      <div class="tab">
+          <button class="tablinks" onclick="clickHandle(event, 'Console')">Console</button>
+          <button class="tablinks" onclick="clickHandle(event, 'CodeEdit')">CodeEdit</button>
+      </div>
+      <div id="Console" class="tabcontent">
+          <textarea id="ID_TEXTCLASS_TEXTCONSOLE" class="consoleedit" wrap="off" rows="35" cols="96"></textarea>
+
+          <button style="position: absolute; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonExecuteClick(document.getElementById('ID_TEXTCLASS_TEXTCODE').value);
+
+    ">
+              Execute
+          </button>
+      </div>
+      <div id="CodeEdit" class="tabcontent">
+          <textarea id="ID_TEXTCLASS_TEXTCODE" class="codeedit" wrap="off" rows="35" cols="96"></textarea>
+
+          <button style="position: absolute; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonSaveClick(document.getElementById('ID_TEXTCLASS_TEXTCODE').value);
+
+    ">
+              Save as
+          </button>
+          <button style="position: absolute; margin-left: 130px" class="button-5" role="button" onclick="
+    OnButtonSaveLatestClick(document.getElementById('ID_TEXTCLASS_TEXTCODE').value);
+
+    ">
+              Save
+          </button>
+
+          <button style="position: absolute; margin-top: 60px; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonOpenClick(document.getElementById('ID_TEXTCLASS_TEXTCODE').value);
+
+    ">
+              Open file
+          </button>
+      </div>
+      <script>
+          function clickHandle(evt, animalName) {
+              let i, tabcontent, tablinks;
+
+              // This is to clear the previous clicked content.
+              tabcontent = document.getElementsByClassName("tabcontent");
+              for (i = 0; i < tabcontent.length; i++) {
+                  tabcontent[i].style.display = "none";
+              }
+
+              // Set the tab to be "active".
+              tablinks = document.getElementsByClassName("tablinks");
+              for (i = 0; i < tablinks.length; i++) {
+                  tablinks[i].className = tablinks[i].className.replace(" active", "");
+              }
+
+              // Display the clicked tab and set it to active.
+              document.getElementById(animalName).style.display = "block";
+              evt.currentTarget.className += " active";
+          }
+
+          function writeToCode(message) {
+              document.getElementById('ID_TEXTCLASS_TEXTCODE').value = message;
+          }
+
+          document.getElementById('ID_TEXTCLASS_TEXTCODE').addEventListener('keydown', function (e) {
+              if (e.key == 'Tab') {
+                  e.preventDefault();
+                  var start = this.selectionStart;
+                  var end = this.selectionEnd;
+
+                  // set textarea value to: text before caret + tab + text after caret
+                  this.value = this.value.substring(0, start) +
+                      '    ' + this.value.substring(end);
+
+                  // put caret at right position again
+                  this.selectionStart =
+                      this.selectionEnd = start + 4;
+              }
+          });
+
+      </script>
+
+  </body>
+</html>
