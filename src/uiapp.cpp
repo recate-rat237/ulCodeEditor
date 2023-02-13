@@ -8,7 +8,7 @@
 #define WINDOW_WIDTH  1336
 #define WINDOW_HEIGHT 768
 
-std::string latestfileName = "";
+std::string latestfileName[10];
 
 UIApp::UIApp() {
   ///
@@ -173,14 +173,16 @@ JSValueRef OnButtonSaveClick(JSContextRef ctx, JSObjectRef function,
     JSStringRelease(strref);
     delete[] buffer;
 
-    latestfileName = filename;
+    int arrNum = JSValueToNumber(ctx, arguments[1], 0);
+    latestfileName[arrNum - 1] = filename;
     return JSValueMakeNull(ctx);
 }
 JSValueRef OnButtonSaveLatestClick(JSContextRef ctx, JSObjectRef function,
     JSObjectRef thisObject, size_t argumentCount,
     const JSValueRef arguments[], JSValueRef* exception) {
-
-    std::string filename = latestfileName;
+    int arrNum = JSValueToNumber(ctx, arguments[1], 0);
+    
+    std::string filename = latestfileName[arrNum - 1];
     std::ofstream wr_file(filename);
     if (!wr_file.is_open()) {
         std::ofstream{ filename };
@@ -196,7 +198,8 @@ JSValueRef OnButtonSaveLatestClick(JSContextRef ctx, JSObjectRef function,
     JSStringRelease(strref);
     delete[] buffer;
 
-    latestfileName = filename;
+    arrNum = JSValueToNumber(ctx, arguments[1], 0);
+    latestfileName[arrNum - 1] = filename;
     
     return JSValueMakeNull(ctx);
 }
@@ -265,9 +268,17 @@ JSValueRef OnButtonOpenClick(JSContextRef ctx, JSObjectRef function,
             // in a smart pointer to release it when it goes out of scope.
             JSRetainPtr<JSStringRef> msg =
                 adopt(JSStringCreateWithUTF8CString(filecontent.c_str()));
+            JSStringRef strref = JSValueToStringCopy(ctx, arguments[0], 0);
+            size_t bufflen = JSStringGetMaximumUTF8CStringSize(strref);
+            char* buffer = new char[bufflen];
 
+            JSStringGetUTF8CString(strref, buffer, bufflen);
+            JSRetainPtr<JSStringRef> msg2 =
+                adopt(JSStringCreateWithUTF8CString(buffer));
+
+            JSStringRelease(strref);
             // Create our list of arguments (we only have one)
-            const JSValueRef args[] = { JSValueMakeString(ctx, msg.get()) };
+            const JSValueRef args[] = { JSValueMakeString(ctx, msg.get()), JSValueMakeString(ctx, msg2.get()) };
 
             // Count the number of arguments in the array.
             size_t num_args = sizeof(args) / sizeof(JSValueRef*);
@@ -290,7 +301,8 @@ JSValueRef OnButtonOpenClick(JSContextRef ctx, JSObjectRef function,
             }
         }
     }
-    latestfileName = ofn.lpstrFile;
+    int arrNum = JSValueToNumber(ctx, arguments[1], 0);
+    latestfileName[arrNum-1] = ofn.lpstrFile;
     
     return JSValueMakeNull(ctx);
 }

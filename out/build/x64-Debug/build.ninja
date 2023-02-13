@@ -57,7 +57,7 @@ build cmake_object_order_depends_target_MyApp: phony || UltralightSDK
 
 build CMakeFiles\MyApp.dir\src\uiapp.cpp.obj: CXX_COMPILER__MyApp_Debug C$:\Users\recate\source\repos\ulCodeEditor\src\uiapp.cpp || cmake_object_order_depends_target_MyApp
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
-  INCLUDES = -IC:\Users\recate\source\repos\ulCodeEditor\PUBLIC -IC:\libs\ClipboardXX_Include -IC:\Users\recate\source\repos\ulCodeEditor\out\build\x64-Debug\SDK\include
+  INCLUDES = -IC:\Users\recate\source\repos\ulCodeEditor\out\build\x64-Debug\SDK\include
   OBJECT_DIR = CMakeFiles\MyApp.dir
   OBJECT_FILE_DIR = CMakeFiles\MyApp.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\MyApp.dir\
@@ -65,7 +65,7 @@ build CMakeFiles\MyApp.dir\src\uiapp.cpp.obj: CXX_COMPILER__MyApp_Debug C$:\User
 
 build CMakeFiles\MyApp.dir\src\main.cpp.obj: CXX_COMPILER__MyApp_Debug C$:\Users\recate\source\repos\ulCodeEditor\src\main.cpp || cmake_object_order_depends_target_MyApp
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
-  INCLUDES = -IC:\Users\recate\source\repos\ulCodeEditor\PUBLIC -IC:\libs\ClipboardXX_Include -IC:\Users\recate\source\repos\ulCodeEditor\out\build\x64-Debug\SDK\include
+  INCLUDES = -IC:\Users\recate\source\repos\ulCodeEditor\out\build\x64-Debug\SDK\include
   OBJECT_DIR = CMakeFiles\MyApp.dir
   OBJECT_FILE_DIR = CMakeFiles\MyApp.dir\src
   TARGET_COMPILE_PDB = CMakeFiles\MyApp.dir\

@@ -125,7 +125,17 @@
   <body>
       <div class="tab">
           <button class="tablinks" onclick="clickHandle(event, 'Console')">Console</button>
-          <button class="tablinks" onclick="clickHandle(event, 'CodeEdit')">CodeEdit</button>
+          <button class="tablinks" onclick="clickHandle(event, 'CodeEdit1')">File (1)</button>
+          <button style="display:none" class="tablinks" onclick="clickHandle(event, 'CodeEdit2')">File (2)</button>
+          <button style="display:none" class="tablinks" onclick="clickHandle(event, 'CodeEdit3')">File (3)</button>
+          <button style="display:none" class="tablinks" onclick="clickHandle(event, 'CodeEdit4')">File (4)</button>
+          <button style="display:none" class="tablinks" onclick="clickHandle(event, 'CodeEdit5')">File (5)</button>
+          <button style="display:none" class="tablinks" onclick="clickHandle(event, 'CodeEdit6')">File (6)</button>
+          <button style="display:none" class="tablinks" onclick="clickHandle(event, 'CodeEdit7')">File (7)</button>
+          <button style="display:none" class="tablinks" onclick="clickHandle(event, 'CodeEdit8')">File (8)</button>
+          <button style="display:none" class="tablinks" onclick="clickHandle(event, 'CodeEdit9')">File (9)</button>
+          <button style="display:none" class="tablinks" onclick="clickHandle(event, 'CodeEdit10')">File (10)</button>
+          <button class="tablinks" onclick="newTab()">(+)</button>
       </div>
       <div id="Console" class="tabcontent">
           <textarea id="ID_TEXTCLASS_TEXTCONSOLE" class="consoleedit" wrap="off" rows="35" cols="96"></textarea>
@@ -143,30 +153,334 @@
               Open file
           </button>
       </div>
-      <div id="CodeEdit" class="tabcontent">
-          <textarea id="ID_TEXTCLASS_TEXTCODE" class="codeedit" wrap="off" rows="35" cols="96"></textarea>
+
+      <div id="CodeEdit1" class="tabcontent">
+          <textarea id="ID_TEXTCLASS_TEXTCODE1" class="codeedit" wrap="off" rows="35" cols="96"></textarea>
 
           <button style="position: absolute; margin-left: 10px" class="button-5" role="button" onclick="
-    OnButtonSaveClick(document.getElementById('ID_TEXTCLASS_TEXTCODE').value);
+    OnButtonSaveClick(document.getElementById('ID_TEXTCLASS_TEXTCODE1').value, 1);
 
     ">
               Save as
           </button>
           <button style="position: absolute; margin-left: 130px" class="button-5" role="button" onclick="
-    OnButtonSaveLatestClick(document.getElementById('ID_TEXTCLASS_TEXTCODE').value);
+    OnButtonSaveLatestClick(document.getElementById('ID_TEXTCLASS_TEXTCODE1').value, 1);
 
     ">
               Save
           </button>
 
           <button style="position: absolute; margin-top: 60px; margin-left: 10px" class="button-5" role="button" onclick="
-    OnButtonOpenClick(document.getElementById('ID_TEXTCLASS_TEXTCODE').value);
+    OnButtonOpenClick('ID_TEXTCLASS_TEXTCODE1', 1);
 
     ">
               Open file
           </button>
       </div>
+      
+      <div id="CodeEdit2" class="tabcontent">
+          <textarea id="ID_TEXTCLASS_TEXTCODE2" class="codeedit" wrap="off" rows="35" cols="96"></textarea>
+
+          <button style="position: absolute; margin-top: 120px; margin-left: 10px" class="button-5" role="button" onclick="
+    document.getElementById('ID_TEXTCLASS_TEXTCODE2').value = '';
+    removeTab(2);
+    clickHandle(event, 'CodeEdit1');
+    ">
+              Remove tab
+          </button>
+
+          <button style="position: absolute; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonSaveClick(document.getElementById('ID_TEXTCLASS_TEXTCODE2').value, 2);
+
+    ">
+              Save as
+          </button>
+          <button style="position: absolute; margin-left: 130px" class="button-5" role="button" onclick="
+    OnButtonSaveLatestClick(document.getElementById('ID_TEXTCLASS_TEXTCODE2').value, 2);
+
+    ">
+              Save
+          </button>
+
+          <button style="position: absolute; margin-top: 60px; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonOpenClick('ID_TEXTCLASS_TEXTCODE2', 2);
+
+    ">
+              Open file
+          </button>
+      </div>
+      
+      <div id="CodeEdit3" class="tabcontent">
+          <textarea id="ID_TEXTCLASS_TEXTCODE3" class="codeedit" wrap="off" rows="35" cols="96"></textarea>
+
+          <button style="position: absolute; margin-top: 120px; margin-left: 10px" class="button-5" role="button" onclick="
+    document.getElementById('ID_TEXTCLASS_TEXTCODE3').value = '';
+    removeTab(3);
+    clickHandle(event, 'CodeEdit1');
+    ">
+              Remove tab
+          </button>
+
+          <button style="position: absolute; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonSaveClick(document.getElementById('ID_TEXTCLASS_TEXTCODE3').value, 3);
+
+    ">
+              Save as
+          </button>
+          <button style="position: absolute; margin-left: 130px" class="button-5" role="button" onclick="
+    OnButtonSaveLatestClick(document.getElementById('ID_TEXTCLASS_TEXTCODE3').value, 3);
+
+    ">
+              Save
+          </button>
+
+          <button style="position: absolute; margin-top: 60px; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonOpenClick('ID_TEXTCLASS_TEXTCODE3', 3);
+
+    ">
+              Open file
+          </button>
+      </div>
+      
+      <div id="CodeEdit4" class="tabcontent">
+          <textarea id="ID_TEXTCLASS_TEXTCODE4" class="codeedit" wrap="off" rows="35" cols="96"></textarea>
+
+          <button style="position: absolute; margin-top: 120px; margin-left: 10px" class="button-5" role="button" onclick="
+    document.getElementById('ID_TEXTCLASS_TEXTCODE4').value = '';
+    removeTab(4);
+    clickHandle(event, 'CodeEdit1');
+    ">
+              Remove tab
+          </button>
+
+          <button style="position: absolute; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonSaveClick(document.getElementById('ID_TEXTCLASS_TEXTCODE4').value, 4);
+
+    ">
+              Save as
+          </button>
+          <button style="position: absolute; margin-left: 130px" class="button-5" role="button" onclick="
+    OnButtonSaveLatestClick(document.getElementById('ID_TEXTCLASS_TEXTCODE4').value, 4);
+
+    ">
+              Save
+          </button>
+
+          <button style="position: absolute; margin-top: 60px; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonOpenClick('ID_TEXTCLASS_TEXTCODE4', 4);
+
+    ">
+              Open file
+          </button>
+      </div>
+     
+      <div id="CodeEdit5" class="tabcontent">
+          <textarea id="ID_TEXTCLASS_TEXTCODE5" class="codeedit" wrap="off" rows="35" cols="96"></textarea>
+
+          <button style="position: absolute; margin-top: 120px; margin-left: 10px" class="button-5" role="button" onclick="
+    document.getElementById('ID_TEXTCLASS_TEXTCODE5').value = '';
+    removeTab(5);
+    clickHandle(event, 'CodeEdit1');
+    ">
+              Remove tab
+          </button>
+
+          <button style="position: absolute; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonSaveClick(document.getElementById('ID_TEXTCLASS_TEXTCODE5').value, 5);
+
+    ">
+              Save as
+          </button>
+          <button style="position: absolute; margin-left: 130px" class="button-5" role="button" onclick="
+    OnButtonSaveLatestClick(document.getElementById('ID_TEXTCLASS_TEXTCODE5').value, 5);
+
+    ">
+              Save
+          </button>
+
+          <button style="position: absolute; margin-top: 60px; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonOpenClick('ID_TEXTCLASS_TEXTCODE5', 5);
+
+    ">
+              Open file
+          </button>
+      </div>
+     
+      <div id="CodeEdit6" class="tabcontent">
+          <textarea id="ID_TEXTCLASS_TEXTCODE6" class="codeedit" wrap="off" rows="35" cols="96"></textarea>
+
+          <button style="position: absolute; margin-top: 120px; margin-left: 10px" class="button-5" role="button" onclick="
+    document.getElementById('ID_TEXTCLASS_TEXTCODE6').value = '';
+    removeTab(6);
+    clickHandle(event, 'CodeEdit1');
+    ">
+              Remove tab
+          </button>
+
+          <button style="position: absolute; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonSaveClick(document.getElementById('ID_TEXTCLASS_TEXTCODE6').value, 6);
+
+    ">
+              Save as
+          </button>
+          <button style="position: absolute; margin-left: 130px" class="button-5" role="button" onclick="
+    OnButtonSaveLatestClick(document.getElementById('ID_TEXTCLASS_TEXTCODE6').value, 6);
+
+    ">
+              Save
+          </button>
+
+          <button style="position: absolute; margin-top: 60px; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonOpenClick('ID_TEXTCLASS_TEXTCODE6', 6);
+
+    ">
+              Open file
+          </button>
+      </div>
+    
+      <div id="CodeEdit7" class="tabcontent">
+          <textarea id="ID_TEXTCLASS_TEXTCODE7" class="codeedit" wrap="off" rows="35" cols="96"></textarea>
+
+          <button style="position: absolute; margin-top: 120px; margin-left: 10px" class="button-5" role="button" onclick="
+    document.getElementById('ID_TEXTCLASS_TEXTCODE7').value = '';
+    removeTab(7);
+    clickHandle(event, 'CodeEdit1');
+    ">
+              Remove tab
+          </button>
+
+          <button style="position: absolute; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonSaveClick(document.getElementById('ID_TEXTCLASS_TEXTCODE7').value, 7);
+
+    ">
+              Save as
+          </button>
+          <button style="position: absolute; margin-left: 130px" class="button-5" role="button" onclick="
+    OnButtonSaveLatestClick(document.getElementById('ID_TEXTCLASS_TEXTCODE7').value, 7);
+
+    ">
+              Save
+          </button>
+
+          <button style="position: absolute; margin-top: 60px; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonOpenClick('ID_TEXTCLASS_TEXTCODE7', 7);
+
+    ">
+              Open file
+          </button>
+      </div>
+   
+      <div id="CodeEdit8" class="tabcontent">
+          <textarea id="ID_TEXTCLASS_TEXTCODE8" class="codeedit" wrap="off" rows="35" cols="96"></textarea>
+
+          <button style="position: absolute; margin-top: 120px; margin-left: 10px" class="button-5" role="button" onclick="
+    document.getElementById('ID_TEXTCLASS_TEXTCODE8').value = '';
+    removeTab(8);
+    clickHandle(event, 'CodeEdit1');
+    ">
+              Remove tab
+          </button>
+
+          <button style="position: absolute; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonSaveClick(document.getElementById('ID_TEXTCLASS_TEXTCODE8').value, 8);
+
+    ">
+              Save as
+          </button>
+          <button style="position: absolute; margin-left: 130px" class="button-5" role="button" onclick="
+    OnButtonSaveLatestClick(document.getElementById('ID_TEXTCLASS_TEXTCODE8').value, 8);
+
+    ">
+              Save
+          </button>
+
+          <button style="position: absolute; margin-top: 60px; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonOpenClick('ID_TEXTCLASS_TEXTCODE8', 8);
+
+    ">
+              Open file
+          </button>
+      </div>
+    
+      <div id="CodeEdit9" class="tabcontent">
+          <textarea id="ID_TEXTCLASS_TEXTCODE9" class="codeedit" wrap="off" rows="35" cols="96"></textarea>
+
+          <button style="position: absolute; margin-top: 120px; margin-left: 10px" class="button-5" role="button" onclick="
+    document.getElementById('ID_TEXTCLASS_TEXTCODE9').value = '';
+    removeTab(9);
+    clickHandle(event, 'CodeEdit1');
+    ">
+              Remove tab
+          </button>
+
+          <button style="position: absolute; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonSaveClick(document.getElementById('ID_TEXTCLASS_TEXTCODE9').value, 9);
+
+    ">
+              Save as
+          </button>
+          <button style="position: absolute; margin-left: 130px" class="button-5" role="button" onclick="
+    OnButtonSaveLatestClick(document.getElementById('ID_TEXTCLASS_TEXTCODE9').value, 9);
+
+    ">
+              Save
+          </button>
+
+          <button style="position: absolute; margin-top: 60px; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonOpenClick('ID_TEXTCLASS_TEXTCODE9', 9);
+
+    ">
+              Open file
+          </button>
+      </div>
+   
+      <div id="CodeEdit10" class="tabcontent">
+          <textarea id="ID_TEXTCLASS_TEXTCODE10" class="codeedit" wrap="off" rows="35" cols="96"></textarea>
+
+          <button style="position: absolute; margin-top: 120px; margin-left: 10px" class="button-5" role="button" onclick="
+    document.getElementById('ID_TEXTCLASS_TEXTCODE10').value = '';
+    removeTab(10);
+    clickHandle(event, 'CodeEdit1');
+    ">
+              Remove tab
+          </button>
+
+          <button style="position: absolute; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonSaveClick(document.getElementById('ID_TEXTCLASS_TEXTCODE10').value, 10);
+
+    ">
+              Save as
+          </button>
+          <button style="position: absolute; margin-left: 130px" class="button-5" role="button" onclick="
+    OnButtonSaveLatestClick(document.getElementById('ID_TEXTCLASS_TEXTCODE10').value, 10);
+
+    ">
+              Save
+          </button>
+
+          <button style="position: absolute; margin-top: 60px; margin-left: 10px" class="button-5" role="button" onclick="
+    OnButtonOpenClick('ID_TEXTCLASS_TEXTCODE10', 10);
+
+    ">
+              Open file
+          </button>
+      </div>
+      
       <script>
+          function newTab() {
+              let tablinks = document.getElementsByClassName("tablinks");
+              for (i = 0; i < tablinks.length; i++) {
+                  if (tablinks[i].style.display == "none") {
+                      tablinks[i].style.display = "inline";
+                      break;
+                  }
+              }
+          }
+          function removeTab(index) {
+              let tablinks = document.getElementsByClassName("tablinks");
+              tablinks[index].style.display = "none";
+          }
+
           function clickHandle(evt, animalName) {
               let i, tabcontent, tablinks;
 
@@ -187,14 +501,14 @@
               evt.currentTarget.className += " active";
           }
 
-          function writeToCode(message) {
-              document.getElementById('ID_TEXTCLASS_TEXTCODE').value = message;
+          function writeToCode(message, id) {
+              document.getElementById(id).value = message;
           }
           function writeToConsole(message) {
               document.getElementById('ID_TEXTCLASS_TEXTCONSOLE').value = message;
           }
 
-          document.getElementById('ID_TEXTCLASS_TEXTCODE').addEventListener('keydown', function (e) {
+          document.getElementsByClassName('consoleedit')[0].addEventListener('keydown', function (e) {
               if (e.key == 'Tab') {
                   e.preventDefault();
                   var start = this.selectionStart;
@@ -208,7 +522,28 @@
                   this.selectionStart =
                       this.selectionEnd = start + 4;
               }
+
           });
+
+          let elem = document.getElementsByClassName('codeedit');
+          for (i = 0; i < elem.length; i++) {
+              elem[i].addEventListener('keydown', function (e) {
+                  if (e.key == 'Tab') {
+                      e.preventDefault();
+                      var start = this.selectionStart;
+                      var end = this.selectionEnd;
+
+                      // set textarea value to: text before caret + tab + text after caret
+                      this.value = this.value.substring(0, start) +
+                          '    ' + this.value.substring(end);
+
+                      // put caret at right position again
+                      this.selectionStart =
+                          this.selectionEnd = start + 4;
+                  }
+
+              });
+          };
 
       </script>
 
