@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 #include <JavaScriptCore/JSRetainPtr.h>
-
+#include <sstream>
 #define WINDOW_WIDTH  1336
 #define WINDOW_HEIGHT 768
 
@@ -197,7 +197,7 @@ JSValueRef OnButtonSaveLatestClick(JSContextRef ctx, JSObjectRef function,
     delete[] buffer;
 
     latestfileName = filename;
-
+    
     return JSValueMakeNull(ctx);
 }
 
@@ -252,7 +252,7 @@ JSValueRef OnButtonOpenClick(JSContextRef ctx, JSObjectRef function,
         JSStringCreateWithUTF8CString("writeToCode"));
 
     JSValueRef func = JSEvaluateScript(ctx, str.get(), 0, 0, 0, 0);
-
+    
     if (JSValueIsObject(ctx, func)) {
 
         // Cast 'func' to an Object, will return null if typecast failed.
@@ -291,6 +291,129 @@ JSValueRef OnButtonOpenClick(JSContextRef ctx, JSObjectRef function,
         }
     }
     latestfileName = ofn.lpstrFile;
+    
+    return JSValueMakeNull(ctx);
+}
+
+JSValueRef OnButtonConsoleOpenClick(JSContextRef ctx, JSObjectRef function,
+    JSObjectRef thisObject, size_t argumentCount,
+    const JSValueRef arguments[], JSValueRef* exception) {
+
+    OPENFILENAMEA ofn;
+    char buf[255] = "\0";
+    char filter[] = "All Files\0*.*\0\0";
+    char filterExt[][6] = { ".*" };
+    char cCustomFilter[256] = "\0\0";
+    int nFilterIndex = 0;
+    ofn.lStructSize = sizeof(OPENFILENAMEA);
+    ofn.hwndOwner = NULL;
+    ofn.hInstance = NULL;
+    ofn.lpstrFilter = filter;
+    ofn.lpstrCustomFilter = cCustomFilter;
+    ofn.nMaxCustFilter = 256;
+    ofn.nFilterIndex = nFilterIndex;
+    ofn.lpstrFile = buf;
+    ofn.nMaxFile = 255;
+    ofn.lpstrFileTitle = NULL;
+    ofn.nMaxFileTitle = 0;
+    ofn.lpstrInitialDir = NULL;
+    ofn.lpstrTitle = 0;
+    ofn.Flags = OFN_FILEMUSTEXIST;
+    ofn.nFileOffset = 0;
+    ofn.nFileExtension = 0;
+    ofn.lpstrDefExt = NULL;
+    ofn.lCustData = NULL;
+    ofn.lpfnHook = NULL;
+    ofn.lpTemplateName = NULL;
+
+    if (!GetOpenFileNameA(&ofn))
+    {
+        return JSValueMakeNull(ctx);
+    }
+
+
+    std::ifstream rd_file(ofn.lpstrFile);
+    std::string filecontent;
+    std::string curline;
+    while (std::getline(rd_file, curline)) {
+
+        filecontent += curline;
+        filecontent += '\n';
+    }
+    rd_file.close();
+
+    JSRetainPtr<JSStringRef> str = adopt(
+        JSStringCreateWithUTF8CString("writeToConsole"));
+
+    JSValueRef func = JSEvaluateScript(ctx, str.get(), 0, 0, 0, 0);
+
+    if (JSValueIsObject(ctx, func)) {
+
+        // Cast 'func' to an Object, will return null if typecast failed.
+        JSObjectRef funcObj = JSValueToObject(ctx, func, 0);
+
+        // Check if 'funcObj' is a Function and not null
+        if (funcObj && JSObjectIsFunction(ctx, funcObj)) {
+
+            // Create a JS string from null-terminated UTF8 C-string, store it
+            // in a smart pointer to release it when it goes out of scope.
+            JSRetainPtr<JSStringRef> msg =
+                adopt(JSStringCreateWithUTF8CString(filecontent.c_str()));
+
+            // Create our list of arguments (we only have one)
+            const JSValueRef args[] = { JSValueMakeString(ctx, msg.get()) };
+
+            // Count the number of arguments in the array.
+            size_t num_args = sizeof(args) / sizeof(JSValueRef*);
+
+            // Create a place to store an exception, if any
+            JSValueRef exception = 0;
+
+            // Call the ShowMessage() function with our list of arguments.
+            JSValueRef result = JSObjectCallAsFunction(ctx, funcObj, 0,
+                num_args, args,
+                &exception);
+
+            if (exception) {
+                // Handle any exceptions thrown from function here.
+                MessageBoxA(0, "Something went wrong!", "Exception", MB_OK);
+            }
+
+            if (result) {
+                // Handle result (if any) here.
+            }
+        }
+    }
+
+    return JSValueMakeNull(ctx);
+}
+
+JSValueRef OnButtonExecuteClick(JSContextRef ctx, JSObjectRef function,
+    JSObjectRef thisObject, size_t argumentCount,
+    const JSValueRef arguments[], JSValueRef* exception) {
+
+
+    JSStringRef strref = JSValueToStringCopy(ctx, arguments[0], 0);
+    size_t bufflen = JSStringGetMaximumUTF8CStringSize(strref);
+    char* buffer = new char[bufflen];
+    JSStringGetUTF8CString(strref, buffer, bufflen);
+    
+    char temp_folder[MAX_PATH];
+    GetTempPathA(MAX_PATH, temp_folder);
+    std::string batDest = temp_folder;
+    batDest += "/ulce_tempexec.bat";
+    std::ofstream{ batDest };
+    std::ofstream wr_bat(batDest);
+    wr_bat << buffer;
+    wr_bat.close();
+
+    MessageBoxA(0, batDest.c_str(), "asd", MB_OK);
+
+    system("\"%temp%/ulce_tempexec.bat\"");
+    
+    JSStringRelease(strref);
+    delete[] buffer;
+
     return JSValueMakeNull(ctx);
 }
 
@@ -361,5 +484,41 @@ void UIApp::OnDOMReady(View* caller,
 
     // Release the JavaScript String we created earlier.
     JSStringRelease(btnopenfunc_name);
+
+    // CONSOLE FUNCTION
+
+    // Create a JavaScript String containing the name of our callback.
+    JSStringRef conbtnexecfunc_name = JSStringCreateWithUTF8CString("OnButtonExecuteClick");
+
+    // Create a garbage-collected JavaScript function that is bound to our
+    // native C callback 'OnButtonClick()'.
+    JSObjectRef conbtnexecfunc_func = JSObjectMakeFunctionWithCallback(ctx, conbtnexecfunc_name, OnButtonExecuteClick);
+
+    // Get the global JavaScript object (aka 'window')
+    JSObjectRef conbtnexecfunc_globalObj = JSContextGetGlobalObject(ctx);
+
+    // Store our function in the page's global JavaScript object so that it
+    // accessible from the page as 'OnButtonClick()'.
+    JSObjectSetProperty(ctx, conbtnexecfunc_globalObj, conbtnexecfunc_name, conbtnexecfunc_func, 0, 0);
+
+    // Release the JavaScript String we created earlier.
+    JSStringRelease(conbtnexecfunc_name);
+
+    // Create a JavaScript String containing the name of our callback.
+    JSStringRef conbtnopenfunc_name = JSStringCreateWithUTF8CString("OnButtonConsoleOpenClick");
+
+    // Create a garbage-collected JavaScript function that is bound to our
+    // native C callback 'OnButtonClick()'.
+    JSObjectRef conbtnopenfunc_func = JSObjectMakeFunctionWithCallback(ctx, conbtnopenfunc_name, OnButtonConsoleOpenClick);
+
+    // Get the global JavaScript object (aka 'window')
+    JSObjectRef conbtnopenfunc_globalObj = JSContextGetGlobalObject(ctx);
+
+    // Store our function in the page's global JavaScript object so that it
+    // accessible from the page as 'OnButtonClick()'.
+    JSObjectSetProperty(ctx, conbtnopenfunc_globalObj, conbtnopenfunc_name, conbtnopenfunc_func, 0, 0);
+
+    // Release the JavaScript String we created earlier.
+    JSStringRelease(conbtnopenfunc_name);
 
 }

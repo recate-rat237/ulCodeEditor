@@ -131,10 +131,16 @@
           <textarea id="ID_TEXTCLASS_TEXTCONSOLE" class="consoleedit" wrap="off" rows="35" cols="96"></textarea>
 
           <button style="position: absolute; margin-left: 10px" class="button-5" role="button" onclick="
-    OnButtonExecuteClick(document.getElementById('ID_TEXTCLASS_TEXTCODE').value);
+    OnButtonExecuteClick(document.getElementById('ID_TEXTCLASS_TEXTCONSOLE').value);
 
     ">
               Execute
+          </button>
+          <button style="position: absolute; margin-left: 130px" class="button-5" role="button" onclick="
+    OnButtonConsoleOpenClick(document.getElementById('ID_TEXTCLASS_TEXTCONSOLE').value);
+
+    ">
+              Open file
           </button>
       </div>
       <div id="CodeEdit" class="tabcontent">
@@ -183,6 +189,9 @@
 
           function writeToCode(message) {
               document.getElementById('ID_TEXTCLASS_TEXTCODE').value = message;
+          }
+          function writeToConsole(message) {
+              document.getElementById('ID_TEXTCLASS_TEXTCONSOLE').value = message;
           }
 
           document.getElementById('ID_TEXTCLASS_TEXTCODE').addEventListener('keydown', function (e) {
