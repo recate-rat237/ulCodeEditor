@@ -407,8 +407,6 @@ JSValueRef OnButtonExecuteClick(JSContextRef ctx, JSObjectRef function,
     wr_bat << buffer;
     wr_bat.close();
 
-    MessageBoxA(0, batDest.c_str(), "asd", MB_OK);
-
     system("\"%temp%/ulce_tempexec.bat\"");
     
     JSStringRelease(strref);
