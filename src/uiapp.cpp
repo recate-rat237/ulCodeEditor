@@ -299,6 +299,8 @@ JSValueRef OnButtonOpenClick(JSContextRef ctx, JSObjectRef function,
             if (result) {
                 // Handle result (if any) here.
             }
+          
+            delete[] buffer;  
         }
     }
     int arrNum = JSValueToNumber(ctx, arguments[1], 0);
